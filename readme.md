@@ -16,16 +16,16 @@ Create a simple Node application to connect to Couchbase, insert data, add prima
 7.  `touch .env && echo -e "user=Administrator \npass=123456 \n" >> .env && touch 01-upsert.js 02-index.js 03-index.js 04-read.js && code .`  
 
 8.  Update file: `01-upsert.js`
-    Add code from GIST: [#01 Upsert](https://gist.github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/01-upsert.js)
+    Add code from: [#01 Upsert](https://github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/01-upsert.js)
 
 9.  Update file: `02-index.js`
-    Add code from GIST: [#02 Index](https://gist.github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/02-index.js)
+    Add code from: [#02 Index](https://github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/02-index.js)
 
 10. Update file: `03-index.js`
-    Add code from GIST: [#03 Index](https://gist.github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/03-index.js)
+    Add code from: [#03 Index](https://github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/03-index.js)
 
 11. Update file: `04-read.js`
-    Add code from GIST: [#04 Read](https://gist.github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/04-read.js)
+    Add code from: [#04 Read](https://github.com/httpJunkie/cb-new-user-node-sdk3/blob/master/04-read.js)
 
 Now we can run each node file using the following commands:  
 
