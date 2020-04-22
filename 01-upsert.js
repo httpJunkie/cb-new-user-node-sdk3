@@ -33,8 +33,7 @@ const categories = [
   "JavaScript", "Node", "React", "Angular", "Vue"
 ]
 const langs = [
-  "JavaScript", "C++", "JavaScript", "Go", "JavaScript", "C#", "JavaScript",
-  "JavaScript", "Java", "JavaScript", "Rust", "JavaScript", "JavaScript", "JavaScript"
+  "JavaScript", "C++", "Go", "C#", "Java", "Rust"
 ]
 
 /* Initialize arrays */
@@ -60,12 +59,14 @@ for (i = 0; i < 15; i++) {
   })
 }
 
-async function upsertEvents() {
-  await events.reduce(async (promise, event) => {
+let asyncEventUpsert = async (promise, event) => {
     await promise
     await collection.upsert(`${event.type}::${event.id}`, event)
     console.info(`doc with key: ${event.type}::${event.id} upserted!`)
-  }, Promise.resolve())
+  }
+
+async function upsertEvents() {
+  await events.reduce(asyncEventUpsert, Promise.resolve())
     .catch(err => console.error(err))
     .then(() => {
       console.log(`Document upsert complete!\n`)
@@ -87,12 +88,14 @@ for (i = 0; i < 15; i++) {
   })
 }
 
+let asyncAttendeeUpsert = async (promise, attendee) => {
+  await promise
+  await collection.upsert(`${attendee.type}::${attendee.id}`, attendee)
+  console.info(`doc with key: ${attendee.type}::${attendee.id} upserted!`)
+}
+
 async function upsertAttendees() {
-  await attendees.reduce(async (promise, attendee) => {
-    await promise
-    await collection.upsert(`${attendee.type}::${attendee.id}`, attendee)
-    console.info(`doc with key: ${attendee.type}::${attendee.id} upserted!`)
-  }, Promise.resolve())
+  await attendees.reduce(asyncAttendeeUpsert, Promise.resolve())
     .catch(err => console.error(err))
     .then(() => {
       console.log(`Document upsert complete!\n`)
@@ -111,12 +114,14 @@ for (i = 0; i < 10; i++) {
   })
 }
 
+let asyncAttendingUpsert = async (promise, attending) => {
+  await promise
+  await collection.upsert(`${attending.type}::${attending.id}`, attending)
+  console.info(`doc with key: ${attending.type}::${attending.id} upserted!`)
+}
+
 async function upsertAttendings() {
-  await attendings.reduce(async (promise, attending) => {
-    await promise
-    await collection.upsert(`${attending.type}::${attending.id}`, attending)
-    console.info(`doc with key: ${attending.type}::${attending.id} upserted!`)
-  }, Promise.resolve())
+  await attendings.reduce(asyncAttendingUpsert, Promise.resolve())
     .catch(err => console.error(err))
     .then(() => {
       console.log(`Document upsert complete!\n`)
@@ -132,5 +137,6 @@ upsertEvents()
   .then(() => {
     upsertAttendings()
     .catch(e => console.log("~ERROR: " + e))
+    .then(() => setTimeout(() => process.exit(22), 1000))
   })
 })
